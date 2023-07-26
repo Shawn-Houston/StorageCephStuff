@@ -1,0 +1,67 @@
+---
+service_type: host
+addr: 192.168.100.201  
+hostname: ceph01   
+location:
+  root: default
+labels:
+  - osd
+  - mon
+  - mgr
+  - _admin
+---
+service_type: host
+addr: 192.168.100.202
+hostname: ceph02
+location:
+  root: default
+  datacenter: DC1
+labels:
+  - osd
+  - mon
+  - mgr
+  - _admin
+---
+service_type: host
+addr: 192.168.100.204
+hostname: ceph04
+labels:
+  - osd
+  - mon
+  - rgw
+  - _admin
+---
+service_type: host
+addr: 192.168.100.205
+hostname: ceph05
+labels:
+  - osd
+  - rgw
+  - _admin
+---
+service_type: mon
+placement:
+  label: "mon"
+---
+service_type: mgr
+service_name: mgr
+placement:
+  label: "mgr"
+---
+service_type: osd
+service_id: all-available-devices
+service_name: osd.all-available-devices
+placement:
+  label: "osd"
+spec:
+  data_devices:
+    all: true
+---
+service_type: rgw
+service_id: objectgw
+service_name: rgw.objectgw
+placement:
+  label: "rgw"
+  count: 4
+spec:
+  rgw_frontend_port: 80
