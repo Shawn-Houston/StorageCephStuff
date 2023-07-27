@@ -77,9 +77,9 @@ Now we create a new CRUSH rule for our index, `replicated_index`. This will be a
 
 `ceph osd crush rule create-replicated replicated_index default host index`
 
-Now create an object bucket (I use the Console) so that the RGW index pool will be created, `default.rgw.buckets.index`.
+Create an object bucket (I use the Console) so that the RGW index pool will be created, `default.rgw.buckets.index`.
 
-Now update the index pool to use the new replicated_index CRUSH rule to place its data on the flash media we have configured for it.
+Last we update the index pool to use the new replicated_index CRUSH rule to place its data on the flash media we have configured for it.
 
 `ceph osd pool set default.rgw.buckets.index crush_rule replicated_index`
 
