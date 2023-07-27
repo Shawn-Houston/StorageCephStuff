@@ -31,7 +31,7 @@ This install assumes that all nodes are essentially identical, and all storage i
 #### On Admin Node
 The `boostrap` command I will show assumes that the cluster has two networks, a public network, and a cluster network. If you only have one network just leave out the `--cluster-network` option. The IP addresses and ranges I am using are examples that you will need to replace with the IP addresses and ranges for your cluster. I am not showing how to build the `registry-auth.json` file. You will need to follow the IBM Storage Ceph documentation in order to create the file.
 
-`cephadm bootstrap --mon-ip 192.168.100.201 --cluster-network 192.168.140.0/24 --registry-json /root/registry-auth.json --apply-spec /root/ceph_cluster-spec.yaml`
+`# cephadm bootstrap --mon-ip 192.168.100.201 --cluster-network 192.168.140.0/24 --registry-json /root/registry-auth.json --apply-spec /root/ceph_cluster-spec.yaml`
 
 ### Complex (OSDs are not identical or are compound)
 
