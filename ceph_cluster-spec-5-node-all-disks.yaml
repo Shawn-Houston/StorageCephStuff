@@ -75,13 +75,23 @@ placement:
 ...
 ---
 service_type: osd
-service_id: all-available-devices
-service_name: osd.all-available-devices
+service_id: mixed-devices
 placement:
   label: "osd"
-spec:
-  data_devices:
-    all: true
+data_devices: 
+  rotational: 1 
+db_devices: 
+  paths: 
+    - /dev/sde 
+...
+---
+service_type: osd
+service_id: index-devices
+placement:
+  label: "osd"
+data_devices: 
+  paths: 
+    - /dev/sdf
 ...
 ---
 service_type: rgw
