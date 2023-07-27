@@ -53,7 +53,35 @@ When boostrap completes it will print out the Console URL, the admin username, a
 
 `# ceph orch ps`
 
+The cephFS protocol is not yet configured. first we add 2 Pools to build the cephFS service with.
+
+`ceph osd pool create cephfs_data`  
+`ceph osd pool create cephfs_metadata`  
+
+Then we create cephFS.
+
+`ceph fs new testme cephfs_metadata cephfs_data`
+
+I chose to name my filesystem `testme`, however the name is arbitrary and you can choose whatever name suits you best.
+
 There will be 4 RGWs once the cluster finishes installing. You will want to install a proxy and configure it to load balance object requests across the 4 RGW endpoints. That is left as an excersice for the reader.
+
+When you look at ceph_cluster-spec-5-node-all-disks.yaml you will see that we have, per node on 5 nodes, 3 HDDs (sdb - sdd), one SSD which has the WAL and Rocks DB for the HDDs (sde), and one SSD we have created an OSD on (sdf). You can adapt this to your particular cluster, but do note that best practice is to always have your RGW index pool on flash media. If you do not then you will have essentially a write only cluster as indexing objects will be very very slow indeed.
+
+After waiting for the cluster to finish installing, up to this point, we now need to move our RGW index onto the flash media. The method I will show is brute force, but works. First we need to determine the OSD names for the flash devices we will be using. In my case I have 5 nodes with 3 HDD OSDs per node that I added first, or 15 OSDs. Then I added the flash drives I will use for indexing last, so knowing that the OSDs are numbered starting at 0, the OSD names I am targeting are OSD.15 - OSD.19. So we update the CRUSH map by removing the device type **ssd** from them and replacing them with our arbitrary device type **index**.
+
+`for i in {15..19}; do ceph osd crush rm-device-class osd.$i;done`  
+`for i in {15..19}; do ceph osd crush set-device-class index osd.$i;done`
+
+Now we create a new CRUSH rule for our index, `replicated_index`. This will be a replicated rule as that is best practice for index pools.
+
+`ceph osd crush rule create-replicated replicated_index default host index`
+
+Now create an object bucket (I use the Console) so that the RGW index pool will be created, `default.rgw.buckets.index`.
+
+No update the index pool to use the new replicated_index CRUSH rule to place its data on the flash media we have configured for it.
+
+`ceph osd pool set default.rgw.buckets.index crush_rule replicated_index`
 
 ## Disconnected Install (offline)
 You will need to create a DNF/YUM repo to provide IBM Storage Ceph RPMs, and you will need to mirror the IBM Storage Ceph containers to a local registry.
