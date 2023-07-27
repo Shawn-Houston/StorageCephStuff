@@ -9,6 +9,7 @@ labels:
   - mon
   - mgr
   - _admin
+...
 ---
 service_type: host
 addr: 192.168.100.202
@@ -21,6 +22,7 @@ labels:
   - mon
   - mgr
   - _admin
+...
 ---
 service_type: host
 addr: 192.168.100.204
@@ -30,6 +32,7 @@ labels:
   - mon
   - rgw
   - _admin
+...
 ---
 service_type: host
 addr: 192.168.100.205
@@ -38,6 +41,7 @@ labels:
   - osd
   - rgw
   - _admin
+...
 ---
 service_type: mon
 placement:
@@ -47,6 +51,7 @@ service_type: mgr
 service_name: mgr
 placement:
   label: "mgr"
+...
 ---
 service_type: osd
 service_id: all-available-devices
@@ -56,6 +61,7 @@ placement:
 spec:
   data_devices:
     all: true
+...
 ---
 service_type: rgw
 service_id: objectgw
@@ -65,3 +71,4 @@ placement:
   count: 4
 spec:
   rgw_frontend_port: 80
+...
