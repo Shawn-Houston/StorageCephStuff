@@ -6,6 +6,7 @@ First let's cover the difference between a connected and a disconnected install.
 ## Connected Install
 
 ### Simple (All OSDs are identical)
+This install assumes that all nodes are essentially identical, and all storage is both identical and are flash. An all HDD install is not recommended. There are two configuration files provided for this install option. The first is ceph_cluster-spec-4-node-all-disks.yaml and is for an object only cluster with 4 nodes. 4 Nodes is the minimum supported number of nodes for IBM Storage Ceph.
 
 ### Complex (OSDs are not identical or are compound)
 
