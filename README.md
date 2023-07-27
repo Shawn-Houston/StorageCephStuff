@@ -85,3 +85,5 @@ Last we update the index pool to use the new replicated_index CRUSH rule to plac
 
 ## Disconnected Install (offline)
 You will need to create a DNF/YUM repo to provide IBM Storage Ceph RPMs, and you will need to mirror the IBM Storage Ceph containers to a local registry.
+
+TBD
