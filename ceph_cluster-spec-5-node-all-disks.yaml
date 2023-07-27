@@ -9,7 +9,6 @@ labels:
   - mon
   - mgr
   - _admin
-...
 ---
 service_type: host
 addr: 192.168.100.202
@@ -23,7 +22,6 @@ labels:
   - mgr
   - rgw
   - _admin
-...
 ---
 service_type: host
 addr: 192.168.100.203
@@ -37,7 +35,6 @@ labels:
   - mgr
   - rgw
   - _admin
-...
 ---
 service_type: host
 addr: 192.168.100.204
@@ -46,7 +43,6 @@ labels:
   - osd
   - mds
   - _admin
-...
 ---
 service_type: host
 addr: 192.168.100.205
@@ -55,24 +51,20 @@ labels:
   - osd
   - mds
   - _admin
-...
 ---
 service_type: mon
 placement:
   label: "mon"
-...
 ---
 service_type: mgr
 service_name: mgr
 placement:
   label: "mgr"
-...
 ---
 service_type: mds
 service_id: cephfs
 placement:
   label: "mds"
-...
 ---
 service_type: osd
 service_id: mixed-devices
@@ -83,7 +75,6 @@ data_devices:
 db_devices: 
   paths: 
     - /dev/sde 
-...
 ---
 service_type: osd
 service_id: index-devices
@@ -92,7 +83,6 @@ placement:
 data_devices: 
   paths: 
     - /dev/sdf
-...
 ---
 service_type: rgw
 service_id: objectgw
@@ -102,4 +92,3 @@ placement:
   count: 4
 spec:
   rgw_frontend_port: 80
-...
