@@ -21,6 +21,21 @@ labels:
   - osd
   - mon
   - mgr
+  - rgw
+  - _admin
+...
+---
+service_type: host
+addr: 192.168.100.203
+hostname: ceph03
+location:
+  root: default
+  datacenter: DC1
+labels:
+  - osd
+  - mon
+  - mgr
+  - rgw
   - _admin
 ...
 ---
@@ -29,8 +44,7 @@ addr: 192.168.100.204
 hostname: ceph04
 labels:
   - osd
-  - mon
-  - rgw
+  - mds
   - _admin
 ...
 ---
@@ -39,7 +53,7 @@ addr: 192.168.100.205
 hostname: ceph05
 labels:
   - osd
-  - rgw
+  - mds
   - _admin
 ...
 ---
@@ -52,6 +66,12 @@ service_type: mgr
 service_name: mgr
 placement:
   label: "mgr"
+...
+---
+service_type: mds
+service_id: cephfs
+placement:
+  label: "mds"
 ...
 ---
 service_type: osd
