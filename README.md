@@ -7,8 +7,7 @@ Note that Red Hat Enterprise Linux 8 or 9 is assumed to be installed, registered
 
 ## Connected Install
 
-### Simple (All OSDs are identical)
-This install assumes that all nodes are essentially identical, and all storage is both identical and are flash. An all HDD install is not recommended. There are two configuration files provided for this install option. The first is ceph_cluster-spec-4-node-all-disks.yaml and is for an *object only* cluster with 4 nodes. 4 Nodes is the minimum supported number of nodes for IBM Storage Ceph.
+### For All Install Types
 
 #### On All Nodes
 1. Add IBM Storage Ceph RPM repo
@@ -27,6 +26,9 @@ This install assumes that all nodes are essentially identical, and all storage i
 3. Ensure necessary packages are installed
 
 `# dnf -y install cephadm ceph-common podman lvm2`
+
+### Simple (All OSDs are identical)
+This install assumes that all nodes are essentially identical, and all storage is both identical and are flash. An all HDD install is not recommended. There are two configuration files provided for this install option. The first is ceph_cluster-spec-4-node-all-disks.yaml and is for an *object only* cluster with 4 nodes. 4 Nodes is the minimum supported number of nodes for IBM Storage Ceph.
 
 #### On Admin Node
 The `boostrap` command I will show assumes that the cluster has two networks, a public network, and a cluster network. If you only have one network just leave out the `--cluster-network` option. The IP addresses and ranges I am using are examples that you will need to replace with the IP addresses and ranges for your cluster. I am not showing how to build the `registry-auth.json` file. You will need to follow the IBM Storage Ceph documentation in order to create the file.
