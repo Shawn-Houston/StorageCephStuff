@@ -15,7 +15,6 @@ addr: 192.168.100.202
 hostname: ceph02
 location:
   root: default
-  datacenter: DC1
 labels:
   - osd
   - mon
@@ -28,7 +27,6 @@ addr: 192.168.100.203
 hostname: ceph03
 location:
   root: default
-  datacenter: DC1
 labels:
   - osd
   - mon
