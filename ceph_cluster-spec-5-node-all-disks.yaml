@@ -71,18 +71,9 @@ service_id: mixed-devices
 placement:
   label: "osd"
 data_devices: 
-  rotational: 1 
+  rotational: 1
 db_devices: 
-  paths: 
-    - /dev/sde 
----
-service_type: osd
-service_id: index-devices
-placement:
-  label: "osd"
-data_devices: 
-  paths: 
-    - /dev/sdf
+  rotational: 0
 ---
 service_type: rgw
 service_id: objectgw
