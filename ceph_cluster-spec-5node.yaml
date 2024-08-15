@@ -1,0 +1,120 @@
+---
+service_type: host
+addr: 192.168.100.201  
+hostname: ceph01   
+location:
+  root: default
+  rack: A1
+labels:
+  - osd
+  - mon
+  - mgr
+  - rgw
+  - nfsingress
+  - _admin
+---
+service_type: host
+addr: 192.168.100.202
+hostname: ceph02
+location:
+  root: default
+  rack: B2
+labels:
+  - osd
+  - mon
+  - mgr
+  - rgw
+  - nfsingress
+  - _admin
+---
+service_type: host
+addr: 192.168.100.203
+hostname: ceph03
+location:
+  root: default
+  rack: C3
+labels:
+  - mon
+  - osd
+  - mgr
+  - nfsingress
+  - rgwingress
+  - _admin
+---
+service_type: host
+addr: 192.168.100.204
+hostname: ceph04
+location:
+  root: default
+  rack: D4
+labels:
+  - osd
+  - mds
+  - nfs
+  - rgwingress
+---
+service_type: host
+addr: 192.168.100.205
+hostname: ceph05
+location:
+  root: default
+  rack: A1
+labels:
+  - osd
+  - mds
+  - nfs
+  - rgwingress
+---
+service_type: mon
+placement:
+  label: "mon"
+---
+service_type: mds
+service_id: cephfs1
+placement:
+  label: "mds"
+---
+service_type: mgr
+service_name: mgr
+placement:
+  count: 3
+  label: "mgr"
+#---
+#service_type: osd
+#service_id: all-available-devices
+#service_name: osd.all-available-devices
+#placement:
+#  label: "osd"
+#spec:
+#  data_devices:
+#    all: true
+#---
+#service_type: osd
+#service_id: mixed-hdd-ssd
+#service_name: osd.mixed-hdd-ssd
+#placement:
+#  label: "osd"
+#spec:
+#  data_devices:
+#    rotational: 1 
+#  db_devices: 
+#    rotational: 0 
+---
+service_type: osd
+service_id: ssd-only
+service_name: osd.ssd-only
+placement:
+  label: "osd"
+spec:
+  data_devices:
+    rotational: 0
+---
+service_type: rgw
+service_id: objectgw
+service_name: rgw.objectgw
+placement:
+#  count: 4
+  count_per_host: 2
+  label: "rgw"
+spec:
+  rgw_frontend_port: 8080
